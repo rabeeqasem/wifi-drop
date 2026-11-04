@@ -13,9 +13,6 @@
       <stop offset="0" stop-color="#2f8bff"/>
       <stop offset="1" stop-color="#5b45ff"/>
     </linearGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#1a1060" flood-opacity="0.35"/>
-    </filter>
   </defs>
 
   <!-- background tile -->
@@ -29,9 +26,10 @@
   </g>
 
   <!-- phone -->
-  <g filter="url(#shadow)">
-    <rect x="90" y="112" width="76" height="114" rx="18" fill="#fff"/>
-  </g>
+  <!-- soft shadow (plain shapes, no filters, so every renderer draws it) -->
+  <rect x="86" y="114" width="84" height="120" rx="22" fill="#1a1060" opacity="0.12"/>
+  <rect x="88" y="116" width="80" height="116" rx="20" fill="#1a1060" opacity="0.14"/>
+  <rect x="90" y="112" width="76" height="114" rx="18" fill="#fff"/>
   <rect x="116" y="121" width="24" height="6" rx="3" fill="#d5dcf5"/>
 
   <!-- download arrow on the phone screen -->

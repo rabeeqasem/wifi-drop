@@ -1,6 +1,6 @@
 name: wifi-drop
 base: core24
-version: '1.0.1'
+version: '1.0.2'
 title: Wi-Fi Drop
 summary: Send files from Linux to your iPhone over Wi-Fi — no app needed
 description: |
@@ -20,7 +20,7 @@ source-code: https://github.com/rabeeqasem/wifi-drop
 issues: https://github.com/rabeeqasem/wifi-drop/issues
 contact: https://github.com/rabeeqasem/wifi-drop/issues
 website: https://github.com/rabeeqasem/wifi-drop
-icon: snap/gui/wifi-drop.svg
+icon: data/logo-512.png
 
 platforms:
   amd64:
