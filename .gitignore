@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# snapcraft build output
+*.snap
+parts/
+stage/
+prime/
+.craft/
+
+# local helper that depends on the local .venv
+/drop

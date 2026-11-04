@@ -1,0 +1,68 @@
+name: wifi-drop
+base: core24
+version: '1.0.1'
+title: Wi-Fi Drop
+summary: Send files from Linux to your iPhone over Wi-Fi — no app needed
+description: |
+  Drag any file onto the window (PDFs, photos, videos, documents) and scan the
+  QR code with your iPhone camera. Safari opens a page where you can save the
+  files to the Files app or Photos. You can also send photos and files from
+  the iPhone back to the PC (they land in Downloads/From iPhone).
+
+  The PC and the phone must be on the same Wi-Fi network. Each session uses a
+  secret link, so other people on the network can't see your files.
+
+  Terminal mode: wifi-drop --cli FILE...
+grade: stable
+confinement: strict
+license: MIT
+source-code: https://github.com/rabeeqasem/wifi-drop
+issues: https://github.com/rabeeqasem/wifi-drop/issues
+contact: https://github.com/rabeeqasem/wifi-drop/issues
+website: https://github.com/rabeeqasem/wifi-drop
+icon: snap/gui/wifi-drop.svg
+
+platforms:
+  amd64:
+
+apps:
+  wifi-drop:
+    command: bin/wifi-drop
+    extensions: [gnome]
+    common-id: io.github.rabeeqasem.WifiDrop
+    plugs:
+      - home
+      - network
+      - network-bind
+      - removable-media
+
+parts:
+  app:
+    plugin: dump
+    source: src
+    organize:
+      wifi-drop: bin/wifi-drop
+      wifidrop: lib/wifidrop
+    stage:
+      - bin/wifi-drop
+      - lib/wifidrop
+
+  python-deps:
+    plugin: nil
+    # Python 3.12 itself comes from the core24 base; GTK/libadwaita from the gnome extension.
+    stage-packages:
+      - python3-gi
+      # The gnome-46-2404 runtime's libadwaita -> libappstream needs libxml2,
+      # which neither the runtime nor core24 ships.
+      - libxml2
+
+  qrcode:
+    # Pure-Python QR encoder, vendored without Pillow: Ubuntu's python3-qrcode pulls in
+    # an older libharfbuzz that shadows the GNOME runtime's copy and breaks GTK.
+    plugin: nil
+    build-packages:
+      - python3-pip
+    override-build: |
+      pip3 install --break-system-packages --no-deps \
+        --target "$CRAFT_PART_INSTALL/lib" qrcode==8.2
+      rm -rf "$CRAFT_PART_INSTALL/lib/bin" "$CRAFT_PART_INSTALL"/lib/qrcode-*.dist-info

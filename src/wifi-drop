@@ -1,0 +1,10 @@
+#!/bin/sh
+# Launcher for Wi-Fi Drop. Works both inside the snap and from the source tree.
+if [ -n "$SNAP" ]; then
+  export PYTHONPATH="$SNAP/lib:$SNAP/usr/lib/python3/dist-packages${PYTHONPATH:+:$PYTHONPATH}"
+  # core24 base provides /usr/bin/python3 (3.12), matching the staged python3-gi
+  exec /usr/bin/python3 -m wifidrop "$@"
+fi
+DIR=$(dirname "$(readlink -f "$0")")
+export PYTHONPATH="$DIR${PYTHONPATH:+:$PYTHONPATH}"
+exec /usr/bin/python3 -m wifidrop "$@"

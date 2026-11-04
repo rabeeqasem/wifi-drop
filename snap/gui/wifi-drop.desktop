@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Wi-Fi Drop
+GenericName=Send Files to iPhone
+Comment=Send files from this PC to your iPhone over Wi-Fi — no app needed on the phone
+Exec=wifi-drop %F
+Icon=${SNAP}/meta/gui/wifi-drop.svg
+Terminal=false
+Categories=Network;FileTransfer;Utility;
+Keywords=airdrop;iphone;ipad;phone;share;send;transfer;wifi;qr;
+StartupNotify=true
+StartupWMClass=io.github.rabeeqasem.WifiDrop
