@@ -297,7 +297,13 @@ class DropWindow(Adw.ApplicationWindow):
 
 class DropApp(Adw.Application):
     def __init__(self):
-        super().__init__(application_id=APP_ID, flags=Gio.ApplicationFlags.HANDLES_OPEN)
+        flags = Gio.ApplicationFlags.HANDLES_OPEN
+        if os.environ.get("SNAP"):
+            # Owning our app id on the session bus needs a dbus slot, which the Snap
+            # Store only grants after manual review. Without this flag GTK fails to
+            # register under AppArmor and the app exits before showing a window.
+            flags |= Gio.ApplicationFlags.NON_UNIQUE
+        super().__init__(application_id=APP_ID, flags=flags)
         self.server = None
         self.window = None
 

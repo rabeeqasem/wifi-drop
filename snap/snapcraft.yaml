@@ -1,6 +1,6 @@
 name: wifi-drop
 base: core24
-version: '1.0.2'
+version: '1.0.4'
 title: Wi-Fi Drop
 summary: Send files from Linux to your iPhone over Wi-Fi — no app needed
 description: |
